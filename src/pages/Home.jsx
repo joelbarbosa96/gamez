@@ -3,9 +3,10 @@ import React, { useEffect } from "react";
 //Routing
 import { useLocation } from "react-router-dom";
 
-//Styling
+//Styling and Animation
 import styled from "styled-components";
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import { fadeIn } from "../animations";
 
 //Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -33,7 +34,7 @@ const Home = () => {
   );
 
   return (
-    <GameList>
+    <GameList variants={fadeIn} initial="hidden" animate="show">
       <AnimateSharedLayout type="crossfade">
         <AnimatePresence>
           {pathId && <GameDetails pathId={pathId} />}

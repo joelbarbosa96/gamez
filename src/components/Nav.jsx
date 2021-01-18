@@ -4,12 +4,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import logo from "../img/logo.svg";
+import { fadeIn } from "../animations";
 
 //Redux
 import { fetchSearch } from "../actions/gamesAction";
 import { useDispatch } from "react-redux";
-
-//Router
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -32,7 +31,7 @@ const Nav = () => {
   };
 
   return (
-    <StyledNav>
+    <StyledNav variants={fadeIn} initial="hidden" animate="show">
       <Logo onClick={clearSearched}>
         <img src={logo} alt="Gamez" />
         <h1>Gamez</h1>
