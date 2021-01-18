@@ -2,6 +2,7 @@ import React from "react";
 
 //Pages
 import Home from "./pages/Home";
+import Nav from "./components/Nav";
 
 //Global styles
 import GlobalStyles from "./components/GlobalStyles";
@@ -13,6 +14,7 @@ function App() {
   return (
     <div className="App">
       <GlobalStyles />
+      <Nav />
       <Route path={["/game/:id", "/"]}>
         <Home />
       </Route>
