@@ -1,10 +1,8 @@
 import axios from "axios";
 import { popularGamesURL, upcomingGamesURL, newGamesURL } from "../api";
 
-//Action Creator
-
 export const loadGames = () => async (dispatch) => {
-  //FETCH AXIOS
+  //Fetch data with Axios
   const popularGamesData = await axios.get(popularGamesURL());
   const upcomingGamesData = await axios.get(upcomingGamesURL());
   const newGamesData = await axios.get(newGamesURL());
