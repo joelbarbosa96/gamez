@@ -1,5 +1,8 @@
 import React from "react";
 
+//Router
+import { useHistory } from "react-router-dom";
+
 //Styling and Animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
@@ -7,18 +10,32 @@ import { motion } from "framer-motion";
 //Redux
 import { useSelector } from "react-redux";
 
-const GameDetails = () => {
+//Util
+import { smallImage } from "../util";
+
+const GameDetails = ({ pathId }) => {
+  //Exit details page
+  const history = useHistory();
+
+  const exitDetailHandler = (e) => {
+    const element = e.target;
+    if (element.classList.contains("shadow")) {
+      document.body.style.overflow = "auto";
+      history.push("/");
+    }
+  };
+
   //GET DATA
   const { screenshots, game, isLoading } = useSelector((state) => state.detail);
 
   return (
     <>
       {!isLoading && (
-        <CardShadow>
-          <Detail>
+        <CardShadow className="shadow" onClick={exitDetailHandler}>
+          <Detail layoutId={pathId}>
             <Stats>
               <div className="rating">
-                <h3>{game.name}</h3>
+                <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
                 <p>Rating: {game.rating}</p>
               </div>
               <Info>
@@ -31,7 +48,11 @@ const GameDetails = () => {
               </Info>
             </Stats>
             <Media>
-              <img src={game.background_image} alt="game background" />
+              <motion.img
+                layoutId={`image ${pathId}`}
+                src={smallImage(game.background_image, 1280)}
+                alt="game background"
+              />
             </Media>
             <Description>
               <p>{game.description_raw}</p>
@@ -39,7 +60,7 @@ const GameDetails = () => {
             <div className="gallery">
               {screenshots.results.map((screenshot) => (
                 <img
-                  src={screenshot.image}
+                  src={smallImage(screenshot.image, 1280)}
                   key={screenshot.id}
                   alt="game screenshot"
                 />
